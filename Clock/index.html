@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clock</title>
+    <style>
+        html{
+            background:url(img.jpg);
+            background-size: cover;
+            text-align: center;
+        }
+        .clock{
+            width: 300px;
+            height: 300px;
+            border: 20px solid white;
+            border-radius: 50%;
+            margin: 50px auto;
+            position: relative;
+            padding: 2rem;
+            box-shadow: 0 0 0 4px rgb(0 0 0 / 10%), inset 0 0 0 3px #efefef, inset 0 0 10px black, 0 0 10px rgb(0 0 0 / 20%);
+        }
+        .clock-face{
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+        .hand{
+            position: absolute;
+            top: 50%;
+            width: 40%;
+            height: 6px;
+            background-color: black;
+            transform-origin: 100%;
+            transform: rotate(90deg);
+            transition: all 0.05s ;
+            transition-timing-function:cubic-bezier(0.1, 2.7, 0.58, 1)
+        }
+       
+    </style>
+</head>
+<body>
+   <div class="clock">
+        <div class="clock-face">
+            <div class="hand hour-hand" ></div>
+            <div class="hand hour-min"></div>
+            <div class="hand hour-second"></div>
+        </div>
+   </div>
+
+   <script>
+        var second=document.querySelector(".hour-second");
+        var minute=document.querySelector(".hour-min");
+        var hourDiv=document.querySelector(".hour-hand");
+        const setData=()=>{
+            const now=new Date();
+            const seconds=now.getSeconds();
+            const min=now.getMinutes();
+            const hour=now.getHours();
+            console.log(hour)
+            degHour=((Number(hour))/12)*360+90
+            degSn=((Number(seconds))/60)*360+90
+            degMin=((Number(min))/60)*360+90
+            second.style.transform = "rotate(" + degSn + "deg)";
+            minute.style.transform = "rotate(" + degMin + "deg)";
+            hourDiv.style.transform="rotate(" + degHour + "deg)";
+
+            
+        }
+        setInterval(setData,1000);
+   </script>
+</body>
+</html>
